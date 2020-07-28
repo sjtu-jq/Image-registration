@@ -1,8 +1,9 @@
-% CFO-C2F registration for infrared and visible images of power equipment
-% Author£ºQian Jiang (in chinese:½ªå¹)
-% First version£º2019-04-29
-% Current version£º2020-02-28
-%% section I: Read source images ¶ÁÈ¡Ô´Í¼Æ¬
+% CFO-C2F: Registration method for infrared and visible images of power equipment
+% Authorï¼šQian Jiang (in chinese: å§œ éª)
+% Department: Department of Electrical Engineering, Shanghai Jiao Tong University, China.
+% First versionï¼š2019-04-29
+% Current versionï¼š2020-05-28
+%% section I: Read source images è¯»å–æºå›¾ç‰‡
 clear all
 set(0,'defaultfigurecolor','w') 
 DistortFlag = 0;%input('Is there distortion of infrared image? :\n');
@@ -25,11 +26,11 @@ elseif 13<=name && name<=15
     visible = 13;
 end
 [I1gray, I2gray, I1rgb, I2rgb, f1, f2, path] = cp_readImage;...
-%     (0,'D:\ÑĞ¾¿ÎÄ¼ş\CSS-SIFT\Exprimental images in Paper\',['I' num2str(infrared) '.jpg'], ['V' num2str(visible) '.jpg']);
+%     (0,'D:\ç ”ç©¶æ–‡ä»¶\CSS-SIFT\Exprimental images in Paper\',['I' num2str(infrared) '.jpg'], ['V' num2str(visible) '.jpg']);
 %% section III: Resize images based on the minimum imaclosege height
 height = size(I1gray,1);
 [I1, I2, scale] = cp_resizeImage(I1gray,I2gray,height);
-%% section IV: Registrate iteratively & Coarse matchingµü´úÅä×¼
+%% section IV: Registrate iteratively & Coarse matchingè¿­ä»£é…å‡†
 close all;
 clc;
 I1_itea = I1;
@@ -96,7 +97,7 @@ figure, subplot(121),imshow(Imosaic);subplot(122),imshow(cp_rgbmosaic(I1rgb,I2rg
 % cp_showMatch(I1rgb,I2rgb,P1,P2,[],'Before Subpixel Fining');
 cp_showMatch(I1rgb,I2rgb,P1,P3,[],'After Subpixel Fineing');
 eva = [eva; name*ones([1 8]); Evaluation1{2}; Evaluation2{2}];
-% imwrite(cp_rgbmosaic(I1rgb,I2rgb,affmat),['D:\ÑĞ¾¿ÎÄ¼ş\MinePaper\µçÍø¼¼Êõ\Firuge in Paper\' f1(1:end-4) '_Mosaic.jpg']);
+% imwrite(cp_rgbmosaic(I1rgb,I2rgb,affmat),['D:\ç ”ç©¶æ–‡ä»¶\MinePaper\ç”µç½‘æŠ€æœ¯\Firuge in Paper\' f1(1:end-4) '_Mosaic.jpg']);
 end
 eva
 %% section VII: Write images that have already been registrated

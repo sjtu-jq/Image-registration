@@ -8,7 +8,8 @@ If you use this project for your research, please cite:
 
 ## Getting Started
 
->1. Just Click file **cp_Main.m** to select a pair of infrared and visible images and then the registration process will start.
+Just Click file **cp_Main.m** to select a pair of infrared and visible images and then the registration process will start.
+You can change some optional parameter values to obtain a better result than the default, such as parameters in **cp_registration**.
 
 ## Contribution
 

@@ -3,42 +3,20 @@
 % Department: Department of Electrical Engineering, Shanghai Jiao Tong University, China.
 % First version：2019-04-29
 % Current version：2020-05-28
-%% section I: Read source images 读取源图片
+%% section I: Read source images
 clear all
 set(0,'defaultfigurecolor','w') 
 DistortFlag = 0;%input('Is there distortion of infrared image? :\n');
-eva=[];
-for name=[1 2 3 4 7 8 9 10 11 12]
-if name<3
-    infrared = name;
-    visible = name; 
-elseif 3<=name && name<=6
-    infrared = name;
-    visible = 3;
-elseif name==7
-    infrared = name;
-    visible = 4;
-elseif 8<=name && name<=12
-    infrared = name;
-    visible = name;
-elseif 13<=name && name<=15
-    infrared = name;
-    visible = 13;
-end
 [I1gray, I2gray, I1rgb, I2rgb, f1, f2, path] = cp_readImage;...
-%     (0,'D:\研究文件\CSS-SIFT\Exprimental images in Paper\',['I' num2str(infrared) '.jpg'], ['V' num2str(visible) '.jpg']);
-%% section III: Resize images based on the minimum imaclosege height
+%     (0,'D:\',['I' num2str(infrared) '.jpg'], ['V' num2str(visible) '.jpg']);
+%% section II: Resize images based on the minimum imaclosege height
 height = size(I1gray,1);
 [I1, I2, scale] = cp_resizeImage(I1gray,I2gray,height);
-%% section IV: Registrate iteratively & Coarse matching迭代配准
+%% section III: Registrate iteratively & Coarse matching
 close all;
 clc;
 I1_itea = I1;
-if name==7 || name==15 || name==14
-    iterationNum = 2;
-else
-    iterationNum = 1;
-end
+iterationNum = 1;
 iteration = 0;
 Runtime = 0;
 maxRMSE = 4*ceil(size(I2,1)/300);
@@ -75,49 +53,17 @@ P2(:,2) = size(I2gray,1) / 2 + scale(2) * ( P2(:,2)-size(I2,1)/2);
 P2(:,1) = size(I2gray,2) / 2 + scale(2) * ( P2(:,1)-size(I2,2)/2);
 corner12(pos_cor1+1:end,2) = size(I2gray,1) / 2 + scale(2) * ( corner12(pos_cor1+1:end,2)-size(I2,1)/2);
 corner12(pos_cor1+1:end,1) = size(I2gray,2) / 2 + scale(2) * ( corner12(pos_cor1+1:end,1)-size(I2,2)/2);
-%% section V: Fine matching
-tic;
+%% section IV: Fine matching
 P3 = cp_subpixelFine(P1,P2); % Fine matching
-toc
-%% section VI: Evaluation critea of the registration results
-if exist([path f1(1:end-4) '.mat'],'file')
-    load([path f1(1:end-4) '.mat'])
-    [Evaluation1,correctindex1] = cp_Evaluation(P1,P2,refTrans,corner12);
-    [Evaluation2,correctindex2] = cp_Evaluation(P1,P3,refTrans,corner12);
-else
-    [Evaluation,correctindex] = cp_Evaluation(P1);
-end
-
-%********* Show visual registration result*******%
-
+%% section V: Show visual registration result
 [~,affmat] = cp_getAffine(I1gray,I2gray,P1,P3);
 Imosaic = cp_graymosaic(I1gray, I2gray, affmat);
 figure, subplot(121),imshow(Imosaic);subplot(122),imshow(cp_rgbmosaic(I1rgb,I2rgb,affmat));
-% cp_showResult(I1rgb,I2rgb,I1gray,I2gray,affmat,3); % checkborder image
-% cp_showMatch(I1rgb,I2rgb,P1,P2,[],'Before Subpixel Fining');
+cp_showResult(I1rgb,I2rgb,I1gray,I2gray,affmat,3); % checkborder image
+cp_showMatch(I1rgb,I2rgb,P1,P2,[],'Before Subpixel Fining');
 cp_showMatch(I1rgb,I2rgb,P1,P3,[],'After Subpixel Fineing');
-eva = [eva; name*ones([1 8]); Evaluation1{2}; Evaluation2{2}];
-% imwrite(cp_rgbmosaic(I1rgb,I2rgb,affmat),['D:\研究文件\MinePaper\电网技术\Firuge in Paper\' f1(1:end-4) '_Mosaic.jpg']);
-end
-eva
-%% section VII: Write images that have already been registrated
-% imwrite(Imosaic,[path f1(1:end-4) '_Mosaic.jpg']);
-% Iaffine = imwarp(I1rgb,affmat,'Outputview',imref2d(size(I2gray)));
-% imwrite(Iaffine,[path f1(1:end-4) '_Trans.jpg']);
-% Icombine = cp_combineImages();figure,imshow(Icombine);
-% if exist([path f1(1:end-4) '.mat'],'file')
-%     load([path f1(1:end-4) '.mat'])
-%     Projective =  [P1 ones(length(P1),1)] * affmat.T; Projective = Projective(:,1:2) ./ Projective(:,3); 
-%     Pref =  [P1 ones(length(P1),1)] * refTrans; Pref = Pref(:,1:2) ./ Pref(:,3); 
-%     figure;
-%     imshow(I1gray);
-%     hold on; plot(P1(:,1),P1(:,2),'g+');hold off;
-%     figure;imshow(I2gray);
-%     hold on;
-%     plot(P3(:,1),P3(:,2),'g+');
-%     plot(Pref(:,1),Pref(:,2),'ro');
-%     plot(Projective(:,1),Projective(:,2),'y*');
-% end
+% imwrite(cp_rgbmosaic(I1rgb,I2rgb,affmat),['D:\' f1(1:end-4) '_Mosaic.jpg']);
+
 %% Obtain reference transformation matrix manually
 % [I1_aff,refaffmatT] = cp_manuallyTrans(I1rgb,I2rgb);
 % cp_showResult(I1rgb,I2rgb,I1gray,I2gray,refaffmatT,5);

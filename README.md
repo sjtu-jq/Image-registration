@@ -2,7 +2,7 @@
 ## About Me
 This code is used for the power equipment infrared and visible imageregistration.
 
-If you use this project for your research, please cite:
+If you use this project for your research, consider to cite:
 
 >JIANG Qian, LIU Yadong, YAN Yingjie, DENG Jun, FANG Jian, LI Zhe, and JIANG Xiuchen. "A contour angle orientation for power equipment infrared and visible image registration", *IEEE Transactions on Power Delivery*, to be published, Doi:10.1109/TPWRD.2020.3011962, 2020.
 
@@ -14,3 +14,7 @@ You can change some optional parameter values to obtain a better result than the
 ## Contribution
 
 Contributions (bug reports, bug fixes, improvements, etc.) are very welcome and should be submitted in the form of new issues and/or pull requests on GitHub.
+
+## Example
+
+Some registration examples of the algorithm are shown at site: https://blog.csdn.net/weixin_43732157/article/details/107640137 (in Chinese)

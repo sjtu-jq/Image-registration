@@ -1,6 +1,6 @@
 # CAO-C2F
 ## About Me
-This code is used for the power equipment infrared and visible imageregistration.
+This code is used for the power equipment infrared and visible image registration.
 
 If you use this project for your research, consider to cite:
 
@@ -9,7 +9,7 @@ If you use this project for your research, consider to cite:
 ## Getting Started
 
 Just Click file **cp_Main.m** to select a pair of infrared and visible images and then the registration process will start.
-You can change some optional parameter values to obtain a better result than the default, such as parameters in **cp_registration**.
+You can change some optional parameters to achieve better registration result than the default, such as parameters in function **cp_registration.m**.
 
 ## Contribution
 
@@ -18,3 +18,5 @@ Contributions (bug reports, bug fixes, improvements, etc.) are very welcome and 
 ## Example
 
 Some registration examples of the algorithm are shown at site: https://blog.csdn.net/weixin_43732157/article/details/107640137 (in Chinese)
+
+有关算法的参数设置、理论原理等问题，欢迎到本人相关博客（上面的链接）提出！

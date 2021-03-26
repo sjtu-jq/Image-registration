@@ -1,6 +1,6 @@
 # CAO-C2F
 ## About Me
-This code is used for the power equipment infrared and visible image registration.
+This code is used for the power equipment infrared and visible image registration (MATLAB version ≥ R2019 is better).
 
 If you use this project for your research, consider to cite:
 

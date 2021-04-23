@@ -7,8 +7,7 @@
 clear all
 set(0,'defaultfigurecolor','w') 
 DistortFlag = 0;%input('Is there distortion of infrared image? :\n');
-[I1gray, I2gray, I1rgb, I2rgb, f1, f2, path] = cp_readImage;...
-%     (0,'D:\',['I' num2str(infrared) '.jpg'], ['V' num2str(visible) '.jpg']);
+[I1gray, I2gray, I1rgb, I2rgb, f1, f2, path] = cp_readImage;
 %% section II: Resize images based on the minimum imaclosege height
 height = size(I1gray,1);
 [I1, I2, scale] = cp_resizeImage(I1gray,I2gray,height);

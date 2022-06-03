@@ -1,3 +1,7 @@
+% Author: JIANG Qian
+% Email : jiang_qqq@qq.com
+% Date  : 2020-03-07
+% All rights reserved.
 function Imosaic = cp_graymosaic(I1,I2,affmat)
 % CP_MOSAIC
 % input: a pair of source images

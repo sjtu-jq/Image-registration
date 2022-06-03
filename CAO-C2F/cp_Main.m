@@ -1,4 +1,4 @@
-% CFO-C2F: Registration method for infrared and visible images of power equipment
+% CAO-C2F: Registration method for infrared and visible images of power equipment
 % Author：Qian Jiang (in chinese: 姜 骞)
 % Department: Department of Electrical Engineering, Shanghai Jiao Tong University, China.
 % First version：2019-04-29
@@ -6,7 +6,7 @@
 %% section I: Read source images
 clear all
 set(0,'defaultfigurecolor','w') 
-DistortFlag = 0;%input('Is there distortion of infrared image? :\n');
+DistortFlag = 0; %input('Is there distortion of infrared image? :\n');
 [I1gray, I2gray, I1rgb, I2rgb, f1, f2, path] = cp_readImage;
 %% section II: Resize images based on the minimum imaclosege height
 height = size(I1gray,1);

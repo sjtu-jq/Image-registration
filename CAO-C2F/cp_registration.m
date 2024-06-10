@@ -1,6 +1,6 @@
 function [regis_points1, regis_points2, Runtime, cor12] = cp_registration(I1,I2,maxtheta,maxErr,iteration,zoomascend,zoomdescend, Lc,showflag,I2ori)
-%========= CP_REGISTRATION Í¼ÏñÅä×¼Ö÷´úÂë=========%
-fprintf('\n¡¾1¡¿Image registrating...\n\tplease wait for few seconds...\n')
+%========= CP_REGISTRATION å›¾åƒé…å‡†ä¸»ä»£ç =========%
+fprintf('\nã€1ã€‘Image registrating...\n\tplease wait for few seconds...\n')
 
 %% Corner detection and orientation computed
 tic,
@@ -25,12 +25,12 @@ if iteration == 0 && showflag
 %     image2 = I2edge;
     figure,
     subplot(121),imshow(image1);hold on, plot(cor1(:,2),cor1(:,1),'y+'),
-    title('ºìÍâÍ¼Ïñ½Çµã')
+    title('çº¢å¤–å›¾åƒè§’ç‚¹')
     vect = quiver(cor1(:,2),cor1(:,1),xu1,yv1);
     vect.Color = 'r';
     vect.LineWidth = 0.8;
     subplot(122),imshow(image2);hold on, plot(cor2(:,2),cor2(:,1),'y+'),
-    title('¿É¼û¹âÍ¼Ïñ½Çµã')
+    title('å¯è§å…‰å›¾åƒè§’ç‚¹')
     vect = quiver(cor2(:,2),cor2(:,1),xu2,yv2);
     vect.Color = 'r';
     vect.LineWidth = 0.8;
@@ -102,7 +102,7 @@ end
 tic;
 if iteration == 0
     delta0 = mod(round(180 / pi*(regis_points222(:,3) - regis_points111(:,3))),360);
-    % delta0 = delta0 - mod(delta0,2); % Take ¦¤orientation = 2¡ãas a various level 
+    % delta0 = delta0 - mod(delta0,2); % Take Î”orientation = 2Â°as a various level 
     dd = 5;
     d_delta = 0:dd:360;
     n_delta = histc(delta0,d_delta);
@@ -118,7 +118,7 @@ if iteration == 0
 %         hold on, plot(x_dd-dd,yy,'LineWidth',2), 
 %                  plot(dd*[n0 n0-1+360/dd*(n0==1) n0+1-(n0==360/dd)]-dd,[n_delta(n0) n_delta(n0-1+360/dd*(n0==1)) n_delta(n0+1-(n0==360/dd))],'r*');
 %         hold off;
-    Modetheta = Modetheta_discrete * dd; % Å×ÎïÏß²åÖµ
+    Modetheta = Modetheta_discrete * dd; % æŠ›ç‰©çº¿æ’å€¼
 else
     Modetheta = 0;
 end
@@ -150,7 +150,7 @@ delta1 = ModePhi - maxtheta1; delta2 = ModePhi + maxtheta2;
 
 Dist = sqrt((zoomscale*trans222(valid0,2)-regis_points111(valid0,2)).^2+(zoomscale*trans222(valid0,1)+size(I1,2)-regis_points111(valid0,1)).^2);
 meandist = mean(Dist);
-[valid1,~] = find( (Dist>= 0.5*meandist) & (Dist <=1.5*zoomscale*meandist) );
+[valid1,~] = find( (Dist>= 0.5*meandist) & (Dist <=1.5*meandist) );
 
 regis_points11 = regis_points111(valid0(valid1),:);
 regis_points22 = regis_points222(valid0(valid1),:);
@@ -172,4 +172,4 @@ if showflag
                  zoomscale*trans222(valid0(valid1(correctindex)),1:2),[],['After ' num2str(iteration) ' Tile angle consistency']);
     cp_showMatch(I1,I2,regis_points1,regis_points2,[],'Fine matching result');% show matches between two images
 end
-fprintf('¡¾1¡¿Completed image registration\n ');
+fprintf('ã€1ã€‘Completed image registration\n ');
